@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--Website created by Arya Bhushan & Aditya Sood-->
+<html>
+    <head>
+        <base href="..">
+        <title>VirtualBox HowTo | Android-x86</title>
+        <link rel="stylesheet" type="text/css" href="master.css" title="default">
+        <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+		<style>
+			.bold {font-weight: bold; }
+		</style>
+        <script type="text/javascript" src="styleswitcher.js"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="mobile.png">
+    </head>
+    <body>
+      <div w3-include-html="navbar.html"></div>
+      <div class="openNav">
+        <div class="icon"></div>
+      </div>
+<!--HTML of main page-->
+        <div class="wrapper">
+            <section>
+                <h1 id="top" class="heading">Android-x86</h1>
+                <h2 class="subheading">Run Android on your PC</h2>
+                <div class=themebtn>
+                  <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                  <button class="button" onclick="setActiveStyleSheet('alternate'); return false;"><img src="dark_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                </div>
+                <br>
+                <h2>VirtualBox How To</h2>
+                <p>
+                  The following are instructions on how to run Android-x86 inside VirtualBox.
+                  <br>Note: For optimal performance, make sure you have enabled either VT-x or AMD-V in your host operating system's BIOS.
+
+                  <br><br>Android-x86 versions tested against Virtualbox versions.
+                  <div id="da_table">
+                  <table>
+                    <tr>
+                    <th>Date Tested</th>
+                    <th>Virtualbox</th>
+                    <th>Host OS</th>
+                    <th>Android-x86</th>
+                    <th>Result</th>
+                  </tr>
+                  <tr>
+                    <td>??</td>	<td>2.2.4</td>	<td>Windows XP</td>	<td>??</td>	<td>Good</td>
+                  </tr>
+                  <tr>
+                    <td>??</td>	<td>3.0.2</td>	<td>Fedora 11</td>	<td>??</td>	<td>Good</td>
+                  </tr>
+                  <tr>
+                    <td>Nov. 2 2017</td>	<td>5.2.0</td>	<td>Windows 10</td>	<td>6.0-r3 32/64 bit</td>	<td>Good</td>
+                  </tr>
+                  </table>
+                </div>
+                </p>
+
+                <h3>Downloading</h3>
+                  <p>Download an ISO of Android-x86 from <a href="/download">here</a>.
+                    <h5>Caution</h5>
+                    If you are using Android-x86 for debugging purposes, some binaries (gdb for example) are built for 32-bit architectures and will not support debugging 64-bit binaries such as the Android app host. Download a 32-bit distribution instead.
+                  </p>
+                <h3>Create a new VM</h3>
+                  <p>If you have not already created a VirtualBox virtual machine for Android-x86 yet, do so as follows:
+                    <ol>
+                      <li>Click the "New" button, and name your new virtual machine however you like. Set Type to Linux, and Version to Linux 2.6 / 3.x / 4.x. Note that you should choose the appropriate bit type for the version of Android-x86 that you downloaded.</li>
+                      <li>Specify how much RAM will be allocated to your virtual machine when you run it. Android doesn't specify a bare-minimum requirement for memory, just keep in mind what apps you plan on running. 2GB (2048MB) is a good place to start, and you can change this later if you need to.</li>
+                      <li>Create a new Hard disk image which will act as your machine's storage. The recommended starting size of 8GB is enough. Click through the rest of the options for creating your Hard disk.</li>
+                    </ol>
+                    Your virtual machine has now been created. It still needs to be initially installed at this point.
+                  </p>
+                  <h3>Settings</h3>
+                  <p>
+                    Tested on VirtualBox 64-bit for Windows, version 5.2.0. Android-x86 version 6.0-r3, both 32-bit and 64-bit.
+                    <br><br>Select your machine, then click the Settings button and refer to the below recommended configuration to make sure your settings match.
+                    <ul>
+                    <li><span class="bold">[System]</span> <span class="bold">Recommended:</span> Processor(s) should be set above 1 if you have more than one virtual processor in your host system. Failure to do so means every single app (like Google Chrome) might crush if you try to use it.</li>
+                    <li><span class="bold">[Display]</span>:
+			    <ol style="padding-left: 40px;">
+				    <li>Optional: Video Memory may be increased beyond the minimum selected automatically. The affects of this are unknown.</li>
+					<li><span class="bold">Mandatory:</span> Unless guest additions are installed<sup><a id="ref1_a" href="#ref1" onclick="scroller('ref1'); return false">[1]</a></sup>, change the default <span class="bold">VMSVGA</span> to <span class="bold">VBoxVGA</span>.
+                    <li>Optional: Enable 3D Acceleration may be checked. The Linux Guest Additions <span class="bold">must</span> (VirtualBox v6.1+) / may (VirtualBox v6.0 and below) need to be installed<sup><a id="ref2_a" href="#ref2" onclick="scroller('ref2'); return false">[2]</a></sup><sup><a id="ref1_b" href="#ref1" onclick="scroller('ref1'); return false">[1]</a></sup> to get any benefit from this.</li>
+					Failure to do so means you won't even be able to launch Android-X86 in the first place.<sup><a id="ref3_a" href="#ref3" onclick="scroller('ref3'); return false">[3]</a></sup>
+			    </ol>
+                    <li><span class="bold">[Storage]</span> Find the first "Empty" item (this should have an icon of a CD). In the Attributes, click on the CD icon with a small down arrow, and pick "Choose Optical Virtual Disk File...". Specify the Android-x86 ISO that you downloaded.</li>
+                    <li><span class="bold">[Audio]</span> Intel HD Audio seems to be natively supported in Android-x86.</li>
+                    <li><span class="bold">[Network]</span> By default, your installation of Android-x86 will be able to automatically connect to the internet. If not, you can try to enable WiFi in Settings/Network & Internet, and connect to showing VirtWifi. If you do not want to connect to the internet in VirtualBox, uncheck Enable Network Adapter under the Adapter 1 tab.</li>
+                  </ul>
+                </p>
+                <h3>Install</h3>
+                <p>Click the green Start arrow to power-on your virtual machine. You'll be presented with a list of options. Use the arrow keys to pick which one you want, then press Enter once the one you want is selected.
+				<ol>
+                  <li>If you don't want to install Android-x86 yet and just want to test it, pick one of the Live CD options (except for Debug mode).</li>
+				  <li>Pick the Installation option if you want your system to be installed to the virtual hard drive.</li>
+				</ol>				  
+                If you want to use higher resolution, you can edit the boot option by pressing TAB, change vga=788 (800x600) to vga=791 (1024x768) or vga=794 (1280x1024), and press Enter. You can also use vga=ask to see all available modes. But please note Android will only work under 16-bit mode.</li>
+                </p>
+                <h4>Partition</h4>
+                <p>
+                  When you are prompted to Choose a partition:
+				  <ol>
+					<li>If you upgrade Android-x86 from a previous version, just select the existing partition. Agree to overwrite it when prompted.</li>
+					<li>If this is a new VM, choose to Create/Modify partitions. Use Bootable but not GPT! This will cause the GRUB installation to fail later.</li>
+                  </ol>
+                  You may partition your disk however you see fit. If you just want a simple installation, create one partition taking up the entire disk and format it as <span class="bold">ext4</span>.
+                </p>
+                <hr>
+                <p>
+                  Continue through the installation. You should <span class="bold">install GRUB</span> when it prompts you to. You may also leave /system as <span class="bold">read and write</span> when prompted.
+                  <br>
+                  Once the installation is complete, force close/shut down the virtual machine and remove the ISO from the virtual CD drive.
+				  <br>
+				  Finaly, start Android-x86. If it's a new machine, once loaded you can perform the Android setup to begin using your machine.
+                </p>
+                <h3>Advanced</h3>
+                <h4>Custom partitions, SDCard</h4>
+                When booting Android-x86, you may specify which partitions represent the data and sdcard. On the boot menu, select an entry you would like to boot from, press TAB, then add the following as it suits your needs:
+                <br><br>
+                DATA=sda1 SDCARD=sda2
+                Press Enter to boot. These options specify user data (your setting, your uploaded applications, ...) go into /dev/sda1, and data saved in sdcard go into /dev/sda2.
+                <br><br>
+                If you build the ISO from source, you can add these options to bootable/newinstaller/boot/isolinux/isolinux.cfg.
+                <br><br>
+                Here is a note from David when using fdisk:
+                <ol>
+                <li>Create a new virtual machine with a hard disk.
+                <li>Launch the Live ISO in Debug mode (I used android-x86-2.2-generic.iso) to get the command prompt.
+                <li>"fdisk /dev/sda", then type:
+                  <ol>
+                      <li>"n" (new partition)
+                      <li>"p" (primary partition)
+                      <li>"1" (1st partition)
+                      <li>"1" (first cylinder)
+                      <li>"xx" (choose the last cylinder, leaving room for a 2nd partition)
+                      <li>"w" (write the partition)
+                    </ol>
+                <li>Repeat #3, but call it partition 2, and use the remaining cylinders.
+                <li>"mdev -s"
+                <li>"mke2fs -j -L DATA /dev/sda1"
+                <li>"mke2fs -j -L SDCARD /dev/sda2"
+                <li>Reboot ("reboot -f")
+                <li>At the boot menu, choose VESA, then hit TAB and type so that the end of the line reads: "DATA=sda1 SDCARD=sda2". (Only need for the generic target images, for VM target images, this is not needed)
+                <li>After booting (and of course disabling mouse integration via the machine menu), the SD card is read as unformatted, but you can format it by going to Settings > SD card & phone settings > Format SD Card, then Mount SD card.
+                <li>The SD card should now work!
+                </ol>
+                Note: for the step  7, if you want to format to vfat only, then you can do :
+                <div class="code-snippet"><span style="color:#d1d1d1">
+                newfs_msdos /dev/sda2
+                  </span></div>
+
+                Also remember the partition type has to be fat32 (b or c). By using vfat, the step 10 is not needed.
+                <br><br>
+                DevTools application has a MediaScanner which  (re)indexes your SD card for cases where you manually copied media over. This ensures that you see new images and/or music in the apps without having to reboot.
+                <br><br>
+                If you downloaded it from within android, the application asks the relevant service to index new files.
+              </p>
+
+              <h3>Playing music</h3>
+              <p>This section describes two ways to upload music files into Android running on a vbox so you can play them by the Music app. Of course, you can save the files to the virtual disk mounted at /sdcard, as described above.</p>
+              <h4>Upload files by adb</h4>
+                <p>Adb is Android Debug Bridge, a tool to debug Android system. If you compile from source, it is located in out/host/linux-x86/bin/adb. Otherwise you can get it from Android SDK. Suppose the network of your vbox is OK, you can upload a file from your host by
+              <div class="code-snippet"><span style="color:#d1d1d1">
+                <code class="code-shell">ADBHOST=&lt;ip of vbox&gt; out/host/linux-x86/bin/adb push &lt;a music file&gt; /sdcard</code>
+                </span></div>
+                You need to know the ip of your vbox. You can get it by Alt-F1 and netcfg. You may also need to reboot Android to see the uploaded files. Of course in this way you have to mount /sdcard to a virtual disk partion.
+                <br><br>
+                For complex network settings of the VirtualBox VM, you should refer to <a href="debug.html">Debug How To</a> on how to connect adb to the VM.
+              </p>
+              <h4>Upload files by wget</h4>
+              <p>You can also upload files by wget in the debug mode. In the debug mode shell, before entering Android,
+                <div class="code-snippet"><span style="color:#32ffea">
+                  # cd /android/sdcard<br>
+                  # netcfg eth0 dhcp<br>
+                  # wget &lt;url of a music file&gt;
+                  </span></div>
+              Then type exit to enter Android.
+            </p>
+
+            <h3>Debug with adb</h3>
+            <p>This section describes the way to debug Android with adb via network.</p>
+            <p>If we want to debug with adb via network, we should ensure the ip of vbox can be accessed by host machine. So we should change the Network Adapter type of vbox to Bridged Adapter. After starting the android-x86, we should follow the above Settings/[Network] section to ensure the network of android-x86 is enabled, and enable USB debugging in Settings/System/Developer Options. Then we can get the device ip from Settings/System/About tablet/IP address. For example, if we see the ip address is 192.168.0.116, then we can use following command to connect android-x86 in vbox from host machine.
+            <div class="code-snippet"><span style="color:#d1d1d1">
+                <code class="code-shell">adb connect 192.168.0.116</code>
+                </span>
+            </div>
+            Then you can use adb command to debug android-x86 such as get log, and dump system information.
+            </p>
+
+	<h3>References</h3>
+    <ol class="refs">
+	<li id="ref1"></a><sup>^ <a href="#ref1_a" onclick="scroller('ref1_a'); return false">a</a> <a href="#ref1_b" onclick="scroller('ref1_b'); return false">b</a></sup> VirtualBox currently <a href="https://www.virtualbox.org/manual/ch04.html#additions-linux" target="_blank">has no Guest Additions for Android.</a></li>
+	<li id="ref2"></a><sup><a href="#ref2_a" onclick="scroller('ref2_a'); return false">^</a></sup> VirtualBox v6.1.0 states: <a href="https://www.virtualbox.org/wiki/Changelog-6.1" target="_blank">"old style 3D support (with VBoxVGA) has been completely removed"</a></li>
+	<li id="ref3"></a><sup><a href="#ref3_a" onclick="scroller('ref3_a'); return false">^</a></sup> VirtualBox states: <a href="https://www.virtualbox.org/manual/ch03.html#settings-display" target="_blank">"Note that you must install the Guest Additions on the guest VM to specify the VBoxSVGA or VMSVGA graphics controller."</a></li>
+    </ol>
+
+        </section>
+
+
+        <div w3-include-html="footer.html"></div>
+                  </div>
+
+      <!--JAVASCRIPT CODE-->
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+    includeHTML();
+    $(".openNav").click(function() {
+    $("body").toggleClass("navOpen");
+    $("nav").toggleClass("open");
+    $(".wrapper").toggleClass("open");
+    $(this).toggleClass("open");
+    });
+    </script>
+
+
+</body>
+</html>

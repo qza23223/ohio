@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--Website created by Arya Bhushan & Aditya Sood-->
+<html>
+    <head>
+        <base href="..">
+        <title>Uvesafb HowTo | Android-x86</title>
+        <link rel="stylesheet" type="text/css" href="master.css" title="default">
+        <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+        <script type="text/javascript" src="styleswitcher.js"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="mobile.png">
+    </head>
+    <body>
+      <div w3-include-html="navbar.html"></div>
+      <div class="openNav">
+        <div class="icon"></div>
+      </div>
+<!--HTML of main page-->
+        <div class="wrapper">
+            <section>
+                <h1 id="top" class="heading">Android-x86</h1>
+                <h2 class="subheading">Run Android on your PC</h2>
+                <div class=themebtn>
+                  <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                  <button class="button" onclick="setActiveStyleSheet('alternate'); return false;"><img src="dark_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                </div>
+                <br>
+                <h2>Uvesafb How To</h2>
+                <h4># how to use uvesafb - by Chih-Wei Huang (cwhuang) 2009/07/23</h4>
+                <p>
+                  The <a href="http://dev.gentoo.org/~spock/projects/uvesafb/">uvesafb</a> denotes the userspace VESA frame buffer driver, a generic frame buffer driver for Linux systems. It offers more features than the original <a href="http://stommel.tamu.edu/~baum/linux/LDP/HOWTO/mini/Vesafb.html">vesafb</a>, such as adjustable resolution and adjustable refresh rates with VBE 3.0-compliant graphic cards.
+
+                  <br><br>Android-x86 has integrated the function of uvesafb to support more wide ranges of hardware. Since it can be compiled as a module and loaded on demand, it serves as the last resort if no native frame buffer driver is found.
+
+                  <br><br>On some platforms, uvesafb is possible to run the native resolution. For example I have tested,
+                  <br><br>
+                  • ASUS Eee Top 1602 (1366x768)<br>
+                  • Acer Aspire One (1024x600)<br><br>
+                  But on other platforms it seems to not work. I am not sure why. Fortunately, this can be overcome by <a href="http://code.google.com/p/patch-hosting-for-android-x86-support/wiki/RunAndroidWithEeePCResolutionUsingGrub2">grub2 + i915resolution patch</a>.
+                </p>
+
+                <h3>Usages</h3>
+                <p>
+                  Basically speaking, you need not to to do anything to use it. Android-x86 will automatically load uvesafb with resolution 800x600 on boot, if no other frame buffer driver is found.
+
+                  <br><br>
+                  However, sometimes you may want to force to load it. For example, the native frame buffer is buggy for your hardware, or if you'd like to change the default resolution. You can specify the following boot options:
+                  <br><br>
+                    • UVESA_MODE=&lt;resolution&gt;<br>
+                    • Force to use uvesafb, and set the resolution to the specified one.<br>
+                    • UVESA_OPTION=&lt;options&gt;<br><br>
+                    Specify other options passed to uvesafb. The default options are mtrr=3 scroll=ywrap.
+                  </p>
+
+                  <h3>Note on virtual machine</h3>
+                  <p>
+                    Since virtual machines usually don't have native frame buffer driver, the vesa frame buffer driver has to be used, either the original vesafb, or the uvesafb.
+                    <br><br>On the boot screen, if the first item is selected, uvesafb will be loaded. Otherwise, the vesafb will be used. However, the uvesafb doesn't work well on Virtual Box 2.2.4/3.0.2. But it runs fine on Qemu.
+                    <br><br>Test result of VMware is welcome.
+                    </p>
+        </section>
+
+
+        <div w3-include-html="footer.html"></div>
+    </div>
+
+      <!--JAVASCRIPT CODE-->
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+    includeHTML();
+    $(".openNav").click(function() {
+    $("body").toggleClass("navOpen");
+    $("nav").toggleClass("open");
+    $(".wrapper").toggleClass("open");
+    $(this).toggleClass("open");
+    });
+    </script>
+
+
+</body>
+</html>

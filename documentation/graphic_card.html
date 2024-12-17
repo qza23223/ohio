@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--Website created by Arya Bhushan & Aditya Sood-->
+<html>
+    <head>
+        <base href="..">
+        <title>Graphic Card Troubleshooting | Android-x86</title>
+        <link rel="stylesheet" type="text/css" href="master.css" title="default">
+        <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+        <script type="text/javascript" src="styleswitcher.js"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="mobile.png">
+    </head>
+    <body>
+      <div w3-include-html="navbar.html"></div>
+      <div class="openNav">
+        <div class="icon"></div>
+      </div>
+<!--HTML of main page-->
+        <div class="wrapper">
+            <section>
+                <h1 id="top" class="heading">Android-x86</h1>
+                <h2 class="subheading">Run Android on your PC</h2>
+                <div class=themebtn>
+                  <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                  <button class="button" onclick="setActiveStyleSheet('alternate'); return false;"><img src="dark_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                </div>
+
+                <h2>How to boot the Android-x86 Live-CD when you have problems with your graphiccard</h2>
+                  <p>
+                    <h3>From ikem.krueger@googlemail.com</h3>
+
+                    When you start the Live-CD and see the menu with the different boot options, hit the &lt;tab&gt; key to see the boot prompt.<br><br>
+
+                    Now you should see something like:
+                    <div class="code-snippet"><span style="color:#44ffc0">
+                      kernel initrd=/initrd.img root=/dev/ram0<br>
+                      androidboot_hardware=generic_x86 acpi_sleep=s3_bios,s3_mode video=-16<br>
+                      quiet SRC= DATA= DPI=240<br>
+                    </span></div>
+
+
+                    You can edit this line. When you're finished, hit &lt;enter&ft; to boot the system.<br><br>
+
+                    I suggest you to remove the word "quiet" to see the kernel messages.<br>
+                    Now the kernel should tell you what he does.<br><br>
+
+                    The parameter "nomodeset" disables "the kernel mode setting" (tells the kernel to not set the graphic resolution, let X do that instead).<br>
+
+                    The parameter "xforcevesa" enforces to use the VESA driver for X.<br><br>
+
+                    I would play with both parameters:<br><br>
+
+                    • Booting with parameter "nomodeset"<br>
+                    • Booting with parameter "xforcevesa"<br>
+                    • Booting with parameter "nomodeset xforcevesa"
+                  </p>
+
+        </section>
+
+
+        <div w3-include-html="footer.html"></div>
+    </div>
+
+      <!--JAVASCRIPT CODE-->
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+    includeHTML();
+    $(".openNav").click(function() {
+    $("body").toggleClass("navOpen");
+    $("nav").toggleClass("open");
+    $(".wrapper").toggleClass("open");
+    $(this).toggleClass("open");
+    });
+    </script>
+
+
+</body>
+</html>

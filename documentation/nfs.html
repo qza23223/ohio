@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--Website created by Arya Bhushan & Aditya Sood-->
+<html>
+    <head>
+        <base href="..">
+        <title>NFS HowTo | Android-x86</title>
+        <link rel="stylesheet" type="text/css" href="master.css" title="default">
+        <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+        <script type="text/javascript" src="styleswitcher.js"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="mobile.png">
+    </head>
+    <body>
+      <div w3-include-html="navbar.html"></div>
+      <div class="openNav">
+        <div class="icon"></div>
+      </div>
+      <!--HTML of main page-->
+        <div class="wrapper">
+            <section>
+                <h1 id="top" class="heading">Android-x86</h1>
+                <h2 class="subheading">Run Android on your PC</h2>
+                <div class=themebtn>
+                  <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                  <button class="button" onclick="setActiveStyleSheet('alternate'); return false;"><img src="dark_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                </div>
+
+                <h2>NFS How To</h2>
+                <h3>---Submitted by linuxosa --</h3>
+                <p>
+                      Now I am able to mount an NFS fold from Android-x86 running as a KVM guest (VNC as
+                      display). The steps I did:<br><br>
+
+                      1. Using eeepc-20090820.iso and install it;<br>
+                      2. Boot to debug mode;<br>
+                      3. modprobe sunrpc lockd nfs;<br>
+                      4. netcfg eth0 dhcp;<br>
+                      5. mount -t nfs -o nolock 192.168.xx.xxx:/path/nfs /sdcard, must use the busybox<br>
+                      mount here, toolbox mount doesn't work in my case, always report "Invalid argument". <br>
+                      I don't know why.<br>
+                      6. then exit the shell so you enter android;<br>
+                      7. Alt+F1 to enter shell again;<br>
+                      8. again: netcfg eth0 dhcp;<br>
+                      9. setprop net.dns1 your-dns-server;<br>
+                      10. route add default gw your-default-gw;<br><br>
+
+                      At this point, I am able to browser internet and use OI file manager to access the
+                      files in the nfs shared folder. <br><br>
+
+                      The virsh xml file for the VM:
+              </p>
+
+                <div class="code-snippet"><span style="color:#44ffc0">
+                              &lt;domain type='kvm'&gt;<br>
+                              &lt;name&gt;Android&lt;/name&gt;<br>
+                              &lt;memory&gt;524288&lt;/memory&gt;<br>
+                              &lt;currentMemory&gt;524288&lt;/currentMemory&gt;<br>
+                              &lt;vcpu&gt;2&lt;/vcpu&gt;<br>
+                              &lt;os&gt;<br>
+                                &lt;type arch='i686' machine='pc'&gt;hvm&lt;/type&gt;<br>
+                                &lt;boot dev='hd'/&gt;<br>
+                                &lt;boot dev='cdrom'/&gt;<br>
+                              &lt;/os&gt;<br>
+                              &lt;features&gt;<br>
+                                &lt;acpi/&gt;<br>
+                                &lt;pae/&gt;<br>
+                              &lt;/features&gt;<br>
+                              &lt;clock offset='localtime'/&gt;<br>
+                              &lt;on_poweroff&gt;destroy&lt;/on_poweroff&gt;<br>
+                            &lt;on_reboot&gt;restart&lt;/on_reboot&gt;<br>
+                              &lt;on_crash&gt;preserve&lt;/on_crash&gt;<br>
+                              &lt;devices&gt;<br>
+                                &lt;emulator&gt;/usr/bin/kvm&lt;/emulator&gt;<br>
+                                &lt;!--disk type='file' device='cdrom'&gt;<br>
+                                  &lt;source file='/home/linuxosa/VM/eeepc-20090820.iso'/&gt;<br>
+                                  &lt;target dev='hdc' bus='ide'/&gt;<br>
+                                &lt;/disk--&gt;<br>
+                              &lt;disk type='file' device='disk'&gt;<br>
+                                  &lt;source file='/home/linuxosa/VM/android.img'/&gt;<br>
+                                  &lt;target dev='hda' bus='ide'/&gt;<br>
+                                &lt;/disk&gt;<br>
+                                &lt;interface type='bridge' model='rtl8139' &gt;<br>
+                                &lt;model type='rtl8139' /&gt;<br>
+                                  &lt;source bridge='br0'/&gt;<br>
+                                  &lt;target dev='vnet0'/&gt;<br>
+                                  &lt;/interface&gt;<br>
+                                &lt;input type='mouse' bus='ps2' /&gt;<br>
+                                &lt;graphics type='vnc' port='-1' autoport='yes' listen="0.0.0.0" /&gt;<br>
+                                &lt;video&gt;<br>
+                                  &lt;model type='vga' vram='9216' heads='1'/&gt;<br>
+                                &lt;/video&gt;<br>
+                                &lt;sound model='ac97'/&gt;<br>
+                              &lt;/devices&gt;<br>
+                            &lt;/domain&gt;
+                </span></div>
+
+
+
+
+
+        </section>
+
+
+        <div w3-include-html="footer.html"></div>
+    </div>
+
+      <!--JAVASCRIPT CODE-->
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script>
+    includeHTML();
+    $(".openNav").click(function() {
+    $("body").toggleClass("navOpen");
+    $("nav").toggleClass("open");
+    $(".wrapper").toggleClass("open");
+    $(this).toggleClass("open");
+    });
+    </script>
+
+</body>
+</html>

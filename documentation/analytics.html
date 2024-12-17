@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--Website created by Arya Bhushan & Aditya Sood-->
+<html>
+    <head>
+        <base href="..">
+        <title>Analytics Program | Android-x86</title>
+        <link rel="stylesheet" type="text/css" href="master.css" title="default">
+        <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+        <script type="text/javascript" src="styleswitcher.js"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="mobile.png">
+    </head>
+    <body>
+      <div w3-include-html="navbar.html"></div>
+      <div class="openNav">
+        <div class="icon"></div>
+      </div>
+<!--HTML of main page-->
+        <div class="wrapper">
+            <section>
+                <h1 id="top" class="heading">Android-x86</h1>
+                <h2 class="subheading">Run Android on your PC</h2>
+                <div class=themebtn>
+                  <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                  <button class="button" onclick="setActiveStyleSheet('alternate'); return false;"><img src="dark_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                </div>
+
+                <h2>Analytics Program</h2>
+                <p>Android-x86 is an open source project maintained by volunteers. To improve the project, we are going to collect some anonymous data from the users.
+                <br><br>
+                In the first launch, these data will be collected
+                <br>• some hardware information
+                <br>• apps usage</p>
+                <p>The data will be sent via Google Analytics Services SDK(Software Development Kit) to Google Analytics (GA) server. On the first booting, the users will be prompted to confirm the data collection as shown in the screenshot:</p>
+                <img alt="Analytics Program" src="https://static.osdn.jp/thumb/g/4/942/800x600_0.png">
+                <p><br>Please say yes (keep the checkboxes checked) to these questions.
+                <br><br>If you'd like to stop sending the data later, set these properties by the commands (using root):</p>
+
+                <div class="code-snippet"><span style="color:#d1d1d1">
+                  setprop persist.sys.hw_statistics 0<br>
+                  setprop persist.sys.apps_statistics 0
+				</span></div>
+
+
+                <p>The core developers will be granted the permission to read the data. Suggestions to improve the Analytics program are welcome.</p>
+                <p>The analytics code has been checked in the marshmallow-x86 branch and included in the <a href="http://www.android-x86.org/releases/releasenote-6-0-rc2">6.0-rc2 release</a>.<br><br>
+                Most of the analytics code is contributed by <a href="http://www.jide.com/">Jide Technology Ltd</a> and licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0.</a></p>
+
+        </section>
+
+
+        <div w3-include-html="footer.html"></div>
+    </div>
+
+      <!--JAVASCRIPT CODE-->
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+    includeHTML();
+    $(".openNav").click(function() {
+    $("body").toggleClass("navOpen");
+    $("nav").toggleClass("open");
+    $(".wrapper").toggleClass("open");
+    $(this).toggleClass("open");
+    });
+    </script>
+
+
+</body>
+</html>

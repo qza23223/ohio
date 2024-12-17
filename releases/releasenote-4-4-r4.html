@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="..">
+  <title>Release 4.4-r4 | Android-x86</title>
+  <link rel="stylesheet" type="text/css" href="master.css" title="default">
+  <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+  <script type="text/javascript" src="styleswitcher.js"></script>
+  <link rel="icon" type="image/png" href="mobile.png">
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+    <body>
+      <div w3-include-html="navbar.html"></div>
+      <div class="openNav">
+        <div class="icon"></div>
+      </div>
+      <!--HTML of main page-->
+      <div class="wrapper">
+        <section>
+          <h1 id="top" class="heading">Android-x86</h1>
+          <h2 class="subheading">Run Android on your PC</h2>
+
+          <!--Style Switcher-->
+          <div class=themebtn>
+            <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width"20px" title='Toggle Theme'/> </button>
+            <button class="button" onclick="setActiveStyleSheet('alternate'); return false;" ><img src="dark_theme.png" height="20px" width"20px" title="Toggle Theme"/></button>
+          </div>
+
+          <br>
+          <h2>Release Note 4.4-r4
+          </h2>
+          <h3>(2016/01/23)</h3>
+          The Android-x86.org is glad to release the 4.4-r4 to the public. This is the fourth and probably the last stable release of Android-x86 4.4 (kitkat-x86). The prebuilt image is available in the following site as usual:
+          <p>
+          <ul>
+            <li><a href="http://www.fosshub.com/Android-x86.html/">http://www.fosshub.com/Android-x86.html/android-x86-4.4-r4.iso</a></li>
+            <li><a href="https://sourceforge.net/projects/android-x86/files/Release%204.4/">https://sourceforge.net/projects/android-x86/files/Release 4.4/</a></li>
+          </ul>
+          </p>
+          <h2><b>Key Features</b></h2>
+          <p>The Android-x86 4.4-r4 is based on the <a href="releases/releasenote-4-4-r3.html">4.4-r3</a> release. It mainly addresses the hazi fonts issue of Mesa 10.5.9 found in some GPUs.</p>
+          <ul>
+            <li>Besides, the EFI ISO support is back-ported to this release. That means the ISO is bootable from a UEFI device. Therefore we only provide one iso file in this release.</li>
+            <li>The kernel is updated to 4.0.9 with patches to support more peripherals like MS Surface series.</li>
+            <li>The obsolete 2GB limitation of data.img (created when installed to NTFS or VFAT) is also removed. Note VFAT still suffers from the 4GB limitation of the filesystem.</li>
+          </ul>
+          <br><br>
+          <h2><b>Released Files
+
+          </b></h2>
+          <p>This release contains one file. The file is bootable in devices with legacy BIOS as well as UEFI firmware.</p>
+          <ul>
+            <li>ISO image: android-x86-4.4-r4.iso&nbsp;
+              <p>sha1sum: 2a33c508a632dd228928816a30fe44eff0da4728</p>
+            </li>
+          </ul>
+
+          <p>The file can be dumped into a usb drive to get a bootable usb stick, like</p>
+
+          <div class="code-snippet"><span style="color:#d1d1d1">
+            <code class="code-shell">dd if=android-x86-4.4-r4.iso of=/dev/sdX</code>
+          </span></div>
+
+          <p>where <tt>/dev/sdX</tt> is the device name of your usb drive.</p>
+
+
+          <h2><b>Known Issues</b></h2>
+          <ul>
+            <li>Suspend and resume may have problems on some systems.</li>
+            <li>The installer can't format ext3 filesystem.</li>
+          </ul>
+          <br>
+          <h2><b>Source code</b></h2>
+          The source code is available in the main <a href="https://osdn.net/projects/android-x86/scm/">git server.</a>
+          <div class="code-snippet"><span style="color:#d1d1d1">
+            <code class="code-shell">repo init -u git://gitscm.sf.net/gitroot/android-x86/manifest -b android-x86-4.4-r4<br></code>
+            <code class="code-shell">repo sync</code>
+          </span></div>
+          <p>Read <a href="source.html">this page</a> for how to compile source code.</p>
+        </section>
+        <div w3-include-html="footer.html"></div>
+      </div>
+
+          <!--JAVASCRIPT CODE-->
+
+          <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+          <script>
+          includeHTML();
+          $(".openNav").click(function() {
+            $("body").toggleClass("navOpen");
+            $("nav").toggleClass("open");
+            $(".wrapper").toggleClass("open");
+            $(this).toggleClass("open");
+          });
+          </script>
+
+        </body>
+        </html>

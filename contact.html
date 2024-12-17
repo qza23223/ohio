@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Contact Us | Android-x86</title>
+  <link rel="stylesheet" type="text/css" href="master.css" title="default">
+  <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+  <script type="text/javascript" src="styleswitcher.js"></script>
+  <link rel="icon" type="image/png" href="mobile.png">
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div w3-include-html="navbar.html"></div>
+  <div class="openNav">
+    <div class="icon"></div>
+  </div>
+  <!--HTML of main page-->
+  <div class="wrapper">
+    <section>
+      <h1 id="top" class="heading">Android-x86</h1>
+      <h2 class="subheading">Run Android on your PC</h2>
+      <br>
+
+      <!--Theme Switcher-->
+      <div class=themebtn>
+        <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width"20px" title='Toggle Theme'/> </button>
+        <button class="button" onclick="setActiveStyleSheet('alternate'); return false;" ><img src="dark_theme.png" height="20px" width"20px" title="Toggle Theme"/></button>
+      </div>
+
+      <h2>Google Group (mailing list)</h2>
+      <span>To participate in this project, send your test reports, patches or suggestions to the discussion groups mention below:</span>
+      <p>
+      <ul>
+        <li><a href="https://groups.google.com/g/android-x86">https://groups.google.com/g/android-x86</a></li>
+        <li><a href="https://groups.google.com/g/android-x86-devel">https://groups.google.com/g/android-x86-devel</a> (invitational only)</li>
+      </ul>
+      </p>
+
+      <p>Before sending technical problems to the mailing list, make sure you have read all related documents carefully, and did some study yourself (e.g., ask google). If you want to ask a troubleshooting issue, please provide enough information, including
+        what your target device is, what branches you tried, and debug messages like output of dmesg and logcat.</p>
+        <span><strong>Do not ask if we support your device or not.</strong> We usually don't have a chance to test it (unless you'd like to donate one). Just try it yourself. If it doesn't work well, let us know.</span>
+        <br>
+        <br>
+<!--
+        <h2>Issue tracker</h2>
+        <span>Send bug reports or features request to the issue tracker</span>
+        <p>
+        <ul>
+          <li><a href="https://github.com/android-x86/android-x86.github.io/issues">https://github.com/android-x86/android-x86.github.io/issues</a></li>
+          <li><del><a href="https://code.google.com/archive/p/android-x86/issues">https://code.google.com/archive/p/android-x86/issues</a></del></li>
+        </ul>
+        </p>
+        <br>
+-->
+      <h2>IRC channel</h2>
+        <span>To communicate with us real-time, join the irc channel #android-x86 at <a href="https://freenode.net/">irc.freenode.net</a></span>
+        <br>
+        <span>You need an irc client, like <a href="https://irssi.org">irssi</a>, a text mode client available for Linux, BSD, Solaris, Apple, Cygwin, etc. Here is a simple instruction:</span>
+        <p><div class="code-snippet"><span style="color:#d1d1d1"><code class="code-shell">irssi -c irc.freenode.net <br><br> /nick &lt;your nickname&gt;<br> /join #android-x86</code></span></div></p>
+        <p>We are usually online, but we may not see your messages quickly. Stay at the channel and be patient to wait a response.</p>
+        <br>
+
+      <h2>Email</h2>
+        <p>If you have any cooperation or donation plan, you may contact us privately: &lt;<a href="mailto:contact@android-x86.org">contact@android-x86.org</a>&gt;.</p>
+        <p>For problems of using Android-x86, use the mailing list described above. <b>Do not send any personal problem or request</b> to this email. You will not get any reply.</p>
+
+
+        <!-----END--->
+      </section>
+
+      <div w3-include-html="footer.html"></div>
+    </div>
+
+    <!--JAVASCRIPT CODE-->
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+    includeHTML();
+    $(".openNav").click(function() {
+      $("body").toggleClass("navOpen");
+      $("nav").toggleClass("open");
+      $(".wrapper").toggleClass("open");
+      $(this).toggleClass("open");
+    });
+    </script>
+
+
+  </body>
+
+  </html>

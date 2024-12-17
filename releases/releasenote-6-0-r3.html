@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="..">
+  <title>Release 6.0-r3 | Android-x86</title>
+  <link rel="stylesheet" type="text/css" href="master.css" title="default">
+  <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+  <script type="text/javascript" src="styleswitcher.js"></script>
+  <link rel="icon" type="image/png" href="mobile.png">
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div w3-include-html="navbar.html"></div>
+  <div class="openNav">
+    <div class="icon"></div>
+  </div>
+  <!--HTML of main page-->
+  <div class="wrapper">
+    <section>
+      <h1 id="top" class="heading">Android-x86</h1>
+      <h2 class="subheading">Run Android on your PC</h2>
+
+      <!--Style Switcher-->
+      <div class=themebtn>
+        <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width"20px" title='Toggle Theme'/> </button>
+        <button class="button" onclick="setActiveStyleSheet('alternate'); return false;" ><img src="dark_theme.png" height="20px" width"20px" title="Toggle Theme"/></button>
+      </div>
+
+      <br>
+      <h2>Release Note 6.0-r3
+      </h2>
+      <h3>(2017/04/24)</h3>
+      The Android-x86 project is glad to announce the 6.0-r3 release to public. This is the third stable release of Android-x86 6.0 (marshmallow-x86). The prebuilt images are available in the following site:
+      <p>
+      <ul>
+        <li><a href="https://osdn.net/rel/android-x86/Release%206.0">https://osdn.net/rel/android-x86/Release%206.0</a></li>
+      </ul>
+      </p>
+      <h2><b>Key Features</b></h2>
+      <p>The updates since <a href="releases/releasenote-6-0-r2.html">6.0-r2</a> include</p>
+      <ul>
+        <li>CD/DVD auto-mount.</li>
+        <li>Fix VMware broken since 6.0-r2.</li>
+        <li>A qemu-android script to launch Android-x86 in QEMU. (only available in RPM installation)</li>
+        <li>Update to latest Android Marshmallow-MR2 release (6.0.1_r79).</li>
+        <li>Update kernel to 4.4.62 with more patches from <a href="https://android.googlesource.com/kernel/common/+/android-4.4">AOSP</a>.</li>
+        <li>Update <a href="http://www.mesa3d.org">Mesa</a> to 17.0.4.</li>
+        <li>More updates from upstream projects (libdrm, ntfs-3g, exfat, bluez).</li>
+      </ul>
+      <br><br>
+      <h2><b>Released Files
+
+      </b></h2>
+      <p>This release contains four file : </p>
+      <ul>
+        <li>32-bit ISO:&nbsp;&nbsp;android-x86-6.0-r3.iso
+          <p>sha1sum: 824bf2b11afc41968ed487ae820a3c8fff1c1602</p>
+        </li>
+        <li>64-bit ISO:&nbsp;&nbsp;android-x86_64-6.0-r3.iso
+          <p>sha1sum: bf3d8fc504900831d95621595a33408c4f49de44</p>
+        </li>
+        <li>32-bit rpm:&nbsp;&nbsp;android-x86-6.0-r3.i686.rpm
+          <p>sha1sum: 2fcc1e768d12ebf3e30c7ef8a2a8fedb78756e2e</p>
+        </li>
+        <li>64-bit rpm:&nbsp;&nbsp;android-x86-6.0-r3.x86_64.rpm
+          <p>sha1sum: bd361bcf85e0b64aa0bc03d2b5edc69d8e5a5f7c</p>
+        </li>
+      </ul>
+      <p>
+        Except the traditional ISO files, this is the first release we tried to package android-x86 files into a Linux package <a href="http://rpm.org/">rpm</a>. It allows Linux users to easily install the release into an existing Linux device with a standalone ext4 root partition. On an rpm based device (Fedora/Red Hat/CentOS/...), just install it like a normal rpm package:</p>
+        <div class="code-snippet"><span style="color:#d1d1d1"><code class="code-shell">sudo rpm -ivh android-x86-6.0-r3.x86_64.rpm</code></span></div>
+        <p>On a deb based device (Debian/Ubuntu/LinuxMint/...), please use the <tt><a href="https://wiki.debian.org/Alien">alien</a></tt> tool to install it:</p>
+        <div class="code-snippet"><span style="color:#d1d1d1"><code class="code-shell">sudo apt install alien <br></code>
+          <code class="code-shell">sudo alien -ci android-x86-6.0-r3.x86_64.rpm</code></span></div>
+          <p>All files will be installed to the /android-6.0-r3/ subdirectory and a boot entry will be added to grub2 menu. Reboot and choose android-x86 item from the menu to enter the system. Alternatively, you can launch Android-x86 in a QEMU virtual machine by the qemu-android script:</p>
+          <div class="code-snippet"><span style="color:#d1d1d1"><code class="code-shell">sudo qemu-android</code></span></div>
+          <p>Note Android-x86 running in QEMU and the real machine (after rebooting) shares the same data sub=folder.</p>
+          To uninstall it :
+          <div class="code-snippet"><span style="color:#d1d1d1">
+            <code class="code-shell">sudo rpm -e android-x86</code>
+          </span></div>
+
+          <p>To use an ISO file, Linux users could just dump the it into a usb drive to create a bootable usb stick like</p>
+          <div class="code-snippet"><span style="color:#d1d1d1"><code class="code-shell">dd if=android-x86-6.0-r3.iso of=/dev/sdX</code></span></div>
+          <p>where <tt>/dev/sdX</tt> is the device name of your usb drive.</p>
+          <p>Windows's users can use the tool <a href="https://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a> to create a bootable usb stick.</p>
+          <p>On a deb based device (Debian/Ubuntu/LinuxMint/...), please use the <tt><a href="https://wiki.debian.org/Alien">alien</a></tt> tool to install it:</p>
+
+
+          <h2><b>Known Issues</b></h2>
+          <ul>
+            <li>Suspend and resume doesn't work on some devices.</li>
+          </ul>
+          <br>
+          <h2><b>Source code</b></h2>
+          The source code is available in the main <a href="https://osdn.net/projects/android-x86/scm/">git server.</a>
+          <div class="code-snippet"><span style="color:#d1d1d1">
+            <code class="code-shell">repo init -u git://git.osdn.net/gitroot/android-x86/manifest -b android-x86-6.0-r3<br></code>
+            <code class="code-shell">repo sync --no-tags --no-clone-bundle</code>
+          </span></div>
+          <p>Read <a href="source.html">this page</a> for how to compile source code.</p>
+    </section>
+    <div w3-include-html="footer.html"></div>
+  </div>
+
+          <!--JAVASCRIPT CODE-->
+
+          <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+          <script>
+          includeHTML();
+          $(".openNav").click(function() {
+            $("body").toggleClass("navOpen");
+            $("nav").toggleClass("open");
+            $(".wrapper").toggleClass("open");
+            $(this).toggleClass("open");
+          });
+          </script>
+
+        </body>
+        </html>

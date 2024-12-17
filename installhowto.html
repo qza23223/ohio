@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Installation Howto | Android-x86</title>
+  <link rel="stylesheet" type="text/css" href="master.css" title="default">
+  <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+  <script type="text/javascript" src="styleswitcher.js"></script>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="mobile.png">
+</head>
+<body>
+  <div w3-include-html="navbar.html"></div>
+  <div class="openNav">
+    <div class="icon"></div>
+  </div>
+  <!--HTML of main page-->
+  <div class="wrapper">
+    <section>
+      <h1 id="top" class="heading">Android-x86</h1>
+      <h2 class="subheading">Run Android on your PC</h2>
+
+      <!--Style Switcher-->
+      <div class=themebtn>
+        <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width"20px" title='Toggle Theme'/> </button>
+        <button class="button" onclick="setActiveStyleSheet('alternate'); return false;" ><img src="dark_theme.png" height="20px" width"20px" title="Toggle Theme"/></button>
+      </div>
+
+      <h1>Installation</h1>
+      <br><h2>Introduction</h2>
+      We have implemented a text-based easy installer to help install Android-x86 to a hard drive. These filesystems are supported:
+      <ul>
+        <li>ext4</li>
+        <li>ntfs</li>
+        <li>fat32</li></ul>
+        <p>In particular, you can install Android-x86 to an NTFS filesystem to co-exist with Windows. See the <a href="#Advanced">Advanced Section</a> for more details.</p>
+
+      <br><h2>Step by Step</h2>
+        <ul>
+          <li>Download an iso image from <a href="download.html">a mirror site</a>. Usually you should just use the latest image.</li>
+          <li>Burn the iso image to cdrom, or create a bootable USB disk (recommended). See the <a href="#Advanced">Advanced Section</a> for details.</li>
+          <li>Boot from the Android-x86 installation CD/USB, choose the 'Install Android-x86 to harddisk' item, as shown below:
+			<br><blockquote><img src="screenshots/InstallBootSelect.png"></blockquote></li>
+          <li>After seconds of booting, you will see a partition selection dialog. You can choose an existing partition to install Android-x86, or you can create or modify partitions by choosing 'Create/Modify partitions'. Note you can install Android-x86 to an external disk like USB drive. If the target drive is not shown, try 'Detect devices'.
+			<br><blockquote><img src="screenshots/InstallChoosePartition.png"></blockquote></li>
+          <li>Android-x86 can co-exist with other operating system or data in the chosen partition. If the partition is formatted, you may choose 'Do not re-format' to keep existing data. Otherwise, choose a filesystem type to format. Note the type you chose must match the partition id, or the boot loader will fail to boot.
+			<br><blockquote><img src="screenshots/InstallChooseFilesystem.png"></blockquote></li>
+          <li>If you choose to format the partition, you will see a warning like below. Select 'Yes' to confirm, or select 'No' to keep the original filesystem.
+			<br><blockquote><img src="screenshots/InstallFormatConfirm.png"></blockquote></li>
+	  <li>Next question is whether to install boot loader Grub. Usually you should answer 'Yes', unless you want to install boot loader by hand yourself.
+			<br><blockquote><img src="screenshots/InstallGrubConfirm.png"></blockquote></li>
+	  <li>Then the installer will ask if you want to install <tt>/system</tt> directory as read-write. If you want to modify the system for some purposes (e.g., debugging), select 'Yes'.
+			<br><blockquote><img src="screenshots/InstallSelectSystemRW.png"></blockquote></li>
+          <li>If you are lucky, the installation will begin, and you will see the progress bar.
+			<br><blockquote><img src="screenshots/InstallProgress.png"></blockquote></li>
+          <li>If you see the following screen, the installation is complete. Congratulations! Now you can run Andrond-x86 directly, or you can reboot and run it:
+			<br><blockquote><img src="screenshots/InstallComplete.png"></blockquote>
+        </ul>
+
+      <br><h2>Upgrade</h2>
+      <p>You may upgrade an older Android-x86 installation by the installer. Just select the partition containing the older installation. The installer will prompt if you'd like to upgrade it:
+			<br><blockquote><img src="screenshots/UpgradeSingleVersion.png"></blockquote>
+      Select 'Yes' to upgrade it. Select 'No' to install the new version to a new directory and keep the older installation untouched.</p>
+
+      <p>If there are multiple older versions in the same partition, the installer will ask which version to upgrade:
+			<br><blockquote><img src="screenshots/UpgradeMultipleVersions.png"></blockquote>
+      Select the one you want to upgrade, or choose to install to a new folder.</p>
+
+      <br><h2>Auto Installation</h2>
+      <p>If you want to use Android-x86 as the only OS in your device, you may choose "Auto Installation" under the "Advanced options".
+			<br><blockquote><img src="screenshots/AutoInstallation.png"></blockquote>
+      </p><p>The installer will prompt you to confirm:
+			<br><blockquote><img src="screenshots/AutoInstallConfirm.png"></blockquote>
+      </p><p>After you select 'Yes', the installer will erase the whole content of the hard disk, partition and install Android-x86 to it.
+      </p><p>If you have multiple hard drives, the installer will let you choose which one to use. Be careful to choose the correct one.
+			<br><blockquote><img src="screenshots/AutoInstallMultiDrives.png"></blockquote>
+      </p>
+      <br><h2>Auto Update</h2>
+      <p>By choosing "Auto Update" under the "Advanced options", the installer could update an older installation automatically.
+			<br><blockquote><img src="screenshots/AutoUpdate.png"></blockquote>
+      </p><p>In this mode, the installer searches a partition named "Android-x86" or the first ext4 partition, and update the older installation in it automatically. If no such a partition is found, the auto update mode will be cancelled.
+      </p>
+
+      <h2>Other boot options</h2>
+      <ul>
+        <li>Live CD - Run Android-x86 without installation</li>
+	<p>The item means to boot Android-x86 directly. This is useful to check if your hardware is compatible with Android-x86 quickly. All data is stored in RAM (tmpfs) and will lose after poweroff.</p>
+        <li>Live CD - Debug mode</li>
+	<p>See the <a href="documentation/debug.html">debug howto</a> for more details.</p>
+        <li>Live CD - Vulkan support (experimental)</li>
+	<p>Enable the experimental <a href="https://en.wikipedia.org/wiki/Vulkan_(API)">Vulkan</a> support. Not all <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPUs</a> support it.</p>
+        <li>Live CD - No Setup Wizard</li>
+	<p>Skip the Setup Wizard. It's useful if you want to test some apps quickly in live mode.</p>
+        <li>Live CD VESA mode - No GPU hardware acceleration</li>
+	<p>Disable GPU hardware acceleration. If you encounter black screen after booting, you may try this mode to see if it's bootable.</p>
+      </ul>
+
+      <br><h1 id="Advanced">Advanced</h1>
+      <h2>Create a bootable USB stick for Android-x86</h2>
+      <p>There are several tools which could be used to create a bootable USB stick for Android-x86. The following tools are available for Windows users:
+      <ul>
+        <li><a href="https://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a> - see <a href="https://www.youtube.com/watch?v=nvwqmzhj0cU">demo video</a>.</li>
+        <li><a href="https://unetbootin.github.io">UNetbootin</a> - see <a href="https://www.youtube.com/watch?v=FPjCJexkqKg">demo video</a>.</li>
+        <li><a href="https://rufus.ie">Rufus</a> - see <a href="https://www.youtube.com/watch?v=RQBWpgxlZxc">demo video</a>.</li>
+        <li><a href="https://www.linuxliveusb.com">Linux Live USB Creator (LiLi)</a> - Obsolete software, but <a href="https://www.linuxliveusb.com/en/component/search/?searchword=android+x86&ordering=newest&searchphrase=all&limit=0">used</a> to officially support Android-x86 <a href="https://www.linuxliveusb.com/en/release-notes">until v4.4</a>.</li>
+      </ul>
+      </p><p>For Linux users, just use the standard <tt>dd</tt> command like:
+      <div class="code-snippet"><span style="color:#d1d1d1">
+        <code class="code-shell">dd if=android-x86_64-9.0-rc1.iso of=/dev/sdX</code>
+      </span></div>
+      where /dev/sdX is the device name of the target USB disk.
+      </p>
+                  <h2>Multi-Boot</h2>
+                  <p>To boot other operating systems, you have to add items for them to /grub/menu.lst. For example, to boot Windows, add the following:</p>
+                  <div class="code-snippet"><span style="color:#d1d1d1">title Windows<br>rootnoverify (hd0,0)<br>chainloader +1</span></div>
+                  <p>This assumes Windows is installed to the first partition of the first hard disk. Alternatively, you need to change rootnoverify to the appropriate value. See <a href="https://www.gnu.org/software/grub/manual/grub/grub.html">Grub Manual</a> for details.</p>
+                  <h3>Updated (2010)</h3>Since <a href="https://en.wikipedia.org/wiki/Android_Froyo">froyo</a>-x86, if there is an NTFS partition in the installed disk, the installer will ask if you want to create a boot item for Windows, as shown below.
+                  <br /><blockquote><img src="screenshots/Dialog-for-creating-Windows-item.png"></blockquote>
+                  <br /><br />
+                  <h1>Issues</h1>
+                  <h3>VMware</h3>
+                  <p>You have to change your virtual disk type to be IDE because the default type in VMware is SCSI, and Android-x86 kernel is not configured to support SCSI. You can follow these steps:<br>
+                  </p>
+                  <ol>
+                    <li>Create a virtual machine.</li>
+                    <li>Edit virtual machine settings after the virtual machine created.</li>
+                    <li>Choose the hard disk and remove it.</li>
+                    <li>Add a hard disk to create a new virtual disk, then you can choose IDE as your virtual disk type.</li>
+                    <li>When finished, you can install android-x86 normally.</li>
+                  </ol>
+                  <br>
+                  <!--End of Content-->
+                </section>
+
+                <div w3-include-html="footer.html"></div>
+              </div>
+
+              <!--JAVASCRIPT CODE-->
+
+              <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+              <script>
+              includeHTML();
+              $(".openNav").click(function() {
+                $("body").toggleClass("navOpen");
+                $("nav").toggleClass("open");
+                $(".wrapper").toggleClass("open");
+                $(this).toggleClass("open");
+              });
+              </script>
+
+
+            </body>
+            </html>

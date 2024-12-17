@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--Website created by Arya Bhushan & Aditya Sood-->
+<html>
+    <head>
+        <base href="..">
+        <title>How To Wake Up The Machine | Android-x86</title>
+        <link rel="stylesheet" type="text/css" href="master.css" title="default">
+        <link rel="alternate stylesheet" type="text/css" href="dark.css" title="alternate">
+        <script type="text/javascript" src="styleswitcher.js"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="mobile.png">
+    </head>
+    <body>
+      <div w3-include-html="navbar.html"></div>
+      <div class="openNav">
+        <div class="icon"></div>
+      </div>
+<!--HTML of main page-->
+        <div class="wrapper">
+            <section>
+                <h1 id="top" class="heading">Android-x86</h1>
+                <h2 class="subheading">Run Android on your PC</h2>
+                <div class=themebtn>
+                  <button class="button" onclick="setActiveStyleSheet('default'); return false;"><img src="light_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                  <button class="button" onclick="setActiveStyleSheet('alternate'); return false;"><img src="dark_theme.png" height="20px" width="20px" title="Toggle Theme"/></button>
+                </div>
+                <br>
+                <h2>How To Wake Up the Machine</h2>
+                <p>
+                  This is a note for issues to wake up the system from sleep.<br><br>
+
+                  In Ecalir, we have two major changes regarding the power management:<br><br>
+                  1. we are showing keygaurd after system resume.<br>
+                  2. only certain predefined keys can be used to wake up the system.<br><br>
+
+                  Here are something users need to know<br><br>
+                  1. You can only use ESC, Menu, left, right, up and down keys to wake up the system.<br>
+                  2. To wake up the system ,you have to hold the keys mentioned above for at least 1 second.<br>
+                  3. You can push menu key when keyguard screen showing up to unlock screen.<br>
+                  4. You can use mouse to turn the wheel on the keyguard screen to unlock screen.<br>
+                </p>
+        </section>
+
+
+        <div w3-include-html="footer.html"></div>
+                  </div>
+
+      <!--JAVASCRIPT CODE-->
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+    includeHTML();
+    $(".openNav").click(function() {
+    $("body").toggleClass("navOpen");
+    $("nav").toggleClass("open");
+    $(".wrapper").toggleClass("open");
+    $(this).toggleClass("open");
+    });
+    </script>
+
+</body>
+</html>
